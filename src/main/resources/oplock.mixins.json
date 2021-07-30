@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.minenash.oplock.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "OpCommandMixin",
+    "DeOpCommandMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

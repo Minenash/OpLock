@@ -1,38 +1,33 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "oplock",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "OpLock",
+  "description": "Allows ops to toggle their op-ness",
   "authors": [
-    "Me!"
+    "Minenash"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Minenash/OpLock",
+    "sources": "https://github.com/Minenash/OpLock",
+    "issues": "https://github.com/Minenash/OpLock/issues"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
 
-  "environment": "*",
+  "environment": "server",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.minenash.oplock.OpLock"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "oplock.mixins.json"
   ],
-
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.17.x",
-    "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "minecraft": "1.16.x"
   }
 }
