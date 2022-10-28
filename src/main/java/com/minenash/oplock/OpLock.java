@@ -5,14 +5,14 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +42,7 @@ public class OpLock implements ModInitializer {
 		ServerPlayConnectionEvents.JOIN.register(((handler, _sender, _server) -> autoLogout(handler.player.getGameProfile())));
 		ServerPlayConnectionEvents.DISCONNECT.register(((handler, _server) -> autoLogout(handler.player.getGameProfile())));
 
-		CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> dispatcher.register(
+		CommandRegistrationCallback.EVENT.register(((dispatcher, commandRegistryAccess, environment) -> dispatcher.register(
 				literal("oplock").requires(OpLock::canRunCommand)
 						.then( literal("login").executes(OpLock::login))
 						.then( literal("logout").executes(OpLock::logout))
@@ -58,20 +58,20 @@ public class OpLock implements ModInitializer {
 		}
 	}
 
-	private static int login(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	private static int login(CommandContext<ServerCommandSource> context) {
 		ServerPlayerEntity player = context.getSource().getPlayer();
 		opStatus.put(player.getUuid(), true);
 		server.getPlayerManager().addToOperators(player.getGameProfile());
-		player.sendMessage(new LiteralText("§8[§2OpLock§8]§a Logged In, you know have op powers"), false);
+		player.sendMessage( Text.literal("§8[§2OpLock§8]§a Logged In, you know have op powers"), false);
 		LOGGER.info("[OpLock] " + player.getGameProfile().getName() + " logged in");
 		return 1;
 	}
 
-	private static int logout(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	private static int logout(CommandContext<ServerCommandSource> context) {
 		ServerPlayerEntity player = context.getSource().getPlayer();
 		opStatus.put(context.getSource().getPlayer().getUuid(), false);
 		server.getPlayerManager().removeFromOperators(player.getGameProfile());
-		player.sendMessage(new LiteralText("§8[§2OpLock§8]§a Logged Out, you know no longer have op powers"), false);
+		player.sendMessage( Text.literal("§8[§2OpLock§8]§a Logged Out, you know no longer have op powers"), false);
 		LOGGER.info("[OpLock] " + player.getGameProfile().getName() + " logged out");
 		return 1;
 	}
