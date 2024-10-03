@@ -2,20 +2,19 @@
   "schemaVersion": 1,
   "id": "oplock",
   "version": "${version}",
-
   "name": "OpLock",
   "description": "Allows ops to toggle their op-ness",
   "authors": [
-    "Minenash"
+    "Minenash",
+    "AmyMialee"
   ],
   "contact": {
     "homepage": "https://github.com/Minenash/OpLock",
     "sources": "https://github.com/Minenash/OpLock",
     "issues": "https://github.com/Minenash/OpLock/issues"
   },
-
   "license": "MIT",
-
+  "icon": "assets/oplock/icon.png",
   "environment": "server",
   "entrypoints": {
     "main": [
@@ -26,8 +25,6 @@
     "oplock.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": ">1.19"
+    "fabric": "*"
   }
 }

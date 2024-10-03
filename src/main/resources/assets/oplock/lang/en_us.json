@@ -1,0 +1,5 @@
+{
+  "oplock.login": "§8[§2OpLock§8]§a Logged In, you now have op powers",
+  "oplock.logout": "§8[§2OpLock§8]§a Logged Out, you now no longer have op powers",
+  "oplock.refresh": "§8[§2OpLock§8]§a Config refreshed"
+}
